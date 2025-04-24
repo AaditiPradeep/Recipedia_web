@@ -2,6 +2,7 @@
    "name": "recipedia",
    "version": "0.1.0",
    "private": true,
+   "proxy": "http://localhost:3000",
    "engines": {
      "node": "18.x",
      "npm": "9.x"
@@ -21,7 +22,7 @@
      "three": "^0.173.0"
    },
    "scripts": {
-     "start": "node server.js",
+     "start": "react-scripts start",
      "dev": "nodemon server.js",
      "frontend": "react-scripts start",
      "build": "react-scripts build",
