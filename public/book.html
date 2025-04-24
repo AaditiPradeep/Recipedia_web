@@ -1,0 +1,228 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipedia Ingredients</title>
+    <link rel="stylesheet" href="book.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <nav>
+        <div class="logo">Recipedia</div>
+        
+        <div class="nav-links">
+            <a href="home.html">HOME</a>
+            <a href="recipe.html" target="_blank">RECIPE</a>
+            <a href="ingredients.html" target="_blank">INGREDIENTS & RECIPE</a>
+            <a href="book.html">ORDER INGREDIENTS</a>
+        </div>
+        
+    </nav>
+    <h1>Order Ingredients</h1>
+    
+    <div class="container">
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search ingredients...">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+        <div id="ingredientsGrid" class="ingredients-grid"></div>
+    </div>
+
+    <div class="cart-section">
+        <h3>Cart</h3>
+        <div id="cartItems"></div>
+        <div id="cartTotal">Total: ₹0</div>
+        <button id="checkoutBtn" style="display:none;">Proceed to Checkout</button>
+    </div>
+
+
+    <script>
+       const ingredients = [
+            // Flours (10)
+            { id: 1, name: 'All-Purpose Flour', category: 'Flour', image: 'https://www.thespruceeats.com/thmb/MecIMVxLn74VSSn1KNcpcDiWqE4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/all_purpose_flour1_2-92747f05d2c7445d86fedae894c8c16e.jpg', price: 50, unit: 'kg' },
+            { id: 2, name: 'Whole Wheat Flour', category: 'Flour', image: 'https://urbandelight.in/cdn/shop/files/WhatsAppImage2023-12-14at03.34.49.jpg?v=1702553785', price: 60, unit: 'kg' },
+            { id: 3, name: 'Almond Flour', category: 'Flour', image: 'https://zamaorganics.com/cdn/shop/files/Untitleddesign_3_2516a1c3-97d5-4596-a7d3-99a02139f2ed.png?v=1707287850&width=1080', price: 450, unit: 'kg' },
+            { id: 4, name: 'Ragi Flour', category: 'Flour', image: 'https://himalaya2home.com/cdn/shop/products/Ragi-flour_0fddca18-419d-4737-8af9-6db09a287468.png?v=1610908228', price: 70, unit: 'kg' },
+            { id: 5, name: 'Chickpea Flour (Besan)', category: 'Flour', image: 'https://m.media-amazon.com/images/I/61NYwvT+YJL._AC_UF1000,1000_QL80_.jpg', price: 80, unit: 'kg' },
+            { id: 6, name: 'Rice Flour', category: 'Flour', image: 'https://riceflour.in/img/rice_flour.jpg', price: 55, unit: 'kg' },
+            { id: 7, name: 'Corn Flour', category: 'Flour', image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2023/3/14/corn-flour-in-wooden-bowl.jpg.rend.hgtvcom.1280.1280.85.suffix/1678827982737.webp', price: 45, unit: 'kg' },
+            { id: 8, name: 'Oat Flour', category: 'Flour', image: 'https://nuttyyogi.com/cdn/shop/products/Oats_Flour_1200x1200px-min.jpg?v=1674452211', price: 120, unit: 'kg' },
+            { id: 9, name: 'Coconut Flour', category: 'Flour', image: 'https://www.netmeds.com/images/cms/magefan_blog/Coconut_flour_898.jpg', price: 300, unit: 'kg' },
+            { id: 10, name: 'Semolina (Sooji)', category: 'Flour', image: 'https://5.imimg.com/data5/SELLER/Default/2024/11/465626934/JT/EL/TF/48533717/semolina-sooji.jpg', price: 65, unit: 'kg' },
+
+            // Sugars (10)
+            { id: 11, name: 'White Sugar', category: 'Sugar', image: 'https://images.ctfassets.net/3s5io6mnxfqz/4ZkVUG6sFkhhl9M6cHMaow/8d7ffcc5d6cf289b5a642de92887a839/AdobeStock_56514025.jpeg', price: 45, unit: 'kg' },
+            { id: 12, name: 'Brown Sugar', category: 'Sugar', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk5CI_nVRvdfcXcpMqLVqUpMQDDVTOqFlQVA&s', price: 80, unit: 'kg' },
+            { id: 13, name: 'Powdered Sugar', category: 'Sugar', image: 'https://cdn.loveandlemons.com/wp-content/uploads/2021/02/powdered-sugar.jpg', price: 70, unit: 'kg' },
+            { id: 14, name: 'Jaggery', category: 'Sugar', image: 'https://vibrantliving.in/cdn/shop/files/Jaggerypowder.png?v=1731060059', price: 90, unit: 'kg' },
+            { id: 15, name: 'Coconut Sugar', category: 'Sugar', image: 'https://cdn.shopify.com/s/files/1/0552/6270/7887/files/Thai-coconut-sugar.jpg?v=1647254157', price: 200, unit: 'kg' },
+            { id: 16, name: 'Palm Sugar', category: 'Sugar', image: 'https://cdn.freshivores.com/uploads/media/4-palm-crystal-11zon6661ab3adc7b1.webp', price: 120, unit: 'kg' },
+            { id: 17, name: 'Honey', category: 'Sugar', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAdxi4Ot2ZVP6F7fiZDu6YPE0yhBc9E3u1Kg&s', price: 300, unit: 'kg' },
+            { id: 18, name: 'Maple Syrup', category: 'Sugar', image: 'https://chenabgourmet.b-cdn.net/wp-content/uploads/2021/05/MapleSyrup-scaled.jpeg', price: 500, unit: 'kg' },
+            { id: 19, name: 'Molasses', category: 'Sugar', image: 'https://tastegreatfoodie.com/wp-content/uploads/2023/05/Easy-Homemade-Molasses.jpg', price: 150, unit: 'kg' },
+            { id: 20, name: 'Stevia', category: 'Sugar', image: 'https://www.wockhardthospitals.com/wp-content/uploads/2022/02/Stevia-768x512-1.webp', price: 800, unit: 'kg' },
+
+            // Baking Ingredients (10)
+            { id: 21, name: 'Baking Powder', category: 'Baking', image: 'https://bakeitpaleo.com/wp-content/uploads/2022/03/Simple-Paleo-Baking-Powder-Recipe.jpg', price: 100, unit: 'kg' },
+            { id: 22, name: 'Baking Soda', category: 'Baking', image: 'https://cdn-prod.medicalnewstoday.com/content/images/articles/321/321137/baking-soda-on-a-spoon-which-may-be-used-for-acne.jpg', price: 90, unit: 'kg' },
+            { id: 23, name: 'Vanilla Extract', category: 'Baking', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaSX7L9CB3dRjCTOiYq8xpD3enWn6mxD2qdA&s', price: 300, unit: 'kg' },
+            { id: 24, name: 'Cocoa Powder', category: 'Baking', image: 'https://prd-upmarket.s3.ap-south-1.amazonaws.com/AA0001/generated/ar1x1/large/ArtisanalCocoaPowder-Large.jpg', price: 200, unit: 'kg' },
+            { id: 25, name: 'Dark Chocolate', category: 'Baking', image: 'https://i0.wp.com/post.healthline.com/wp-content/uploads/2021/02/dark-chocolate-bar-1296x728-header.jpg?w=1155&h=1528', price: 400, unit: 'kg' },
+            { id: 26, name: 'Chocolate Chips', category: 'Baking', image: 'https://www.preparedpantry.com/cdn/shop/products/13780307_lmilkchocolatechipsreduced_02cec14d-1b24-4cb1-aa0f-0a168ba4d856.jpg?v=1664678299', price: 350, unit: 'kg' },
+            { id: 27, name: 'Food Coloring', category: 'Baking', image: 'https://chefmaster.com/cdn/shop/articles/Different-Food-Color-Types-1-web.jpg?v=1697753873', price: 200, unit: 'kg' },
+            { id: 28, name: 'Instant Yeast', category: 'Baking', image: 'https://5.imimg.com/data5/SELLER/Default/2022/4/AF/BW/WE/23983265/instant-yeast.jpeg', price: 150, unit: 'kg' },
+            { id: 29, name: 'Cream of Tartar', category: 'Baking', image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/07/02/cream-of-tartar-in-metal-scoop.jpg.rend.hgtvcom.1280.960.85.suffix/1625240123796.webp', price: 180, unit: 'kg' },
+            { id: 30, name: 'Gelatin Powder', category: 'Baking', image: 'https://www.jiomart.com/images/product/original/rv7ukvsr5u/mgbn-gelatin-powder-for-face-mask-hair-removal-skin-care-350-gm-product-images-orv7ukvsr5u-p597490151-1-202301111825.jpg?im=Resize=(420,420)', price: 250, unit: 'kg' },
+
+            //Dairy (10)
+            { id: 31, name: 'Milk Powder', category: 'Dairy', image: 'https://purensoselect.in/cdn/shop/products/100-goat-milk-powder-661.webp?v=1676277895', price: 250, unit: 'kg' },
+            { id: 32, name: 'Condensed Milk', category: 'Dairy', image: 'https://www.simplyrecipes.com/thmb/vPtJoeHb-MTvjpt2UhQAj1BGUHo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipe-Sweetened-Condensed-Milk-LEAD-06-5d49c1a582cc4743b0dfa99a7aa1688f.jpg', price: 180, unit: 'kg' },
+            { id: 33, name: 'Fresh Cream', category: 'Dairy', image: 'https://www.inspiredtaste.net/wp-content/uploads/2025/02/Homemade-Whipped-Cream-Recipe.jpg', price: 200, unit: 'kg' },
+            { id: 34, name: 'Buttermilk Powder', category: 'Dairy', image: 'https://www.fitsa-group.com/wp-content/uploads/2021/11/Product-page-Buttermilk-powders.jpg', price: 300, unit: 'kg' },
+            { id: 35, name: 'Whey Protein Powder', category: 'Dairy', image: 'https://m.media-amazon.com/images/I/71gQNJJi2CL.jpg', price: 500, unit: 'kg' },
+            { id: 36, name: 'Paneer', category: 'Dairy', image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2024/05/how-to-make-paneer-recipe.jpg', price: 250, unit: 'kg' },
+            { id: 37, name: 'Greek Yogurt Powder', category: 'Dairy', image: 'https://www.liveeatlearn.com/wp-content/uploads/2024/08/how-to-make-homemade-greek-yogurt-25.jpg', price: 400, unit: 'kg' },
+            { id: 38, name: 'Cheese Powder', category: 'Dairy', image: 'https://m.media-amazon.com/images/I/81KgOGFA+gL._AC_UF350,350_QL80_DpWeblab_.jpg', price: 350, unit: 'kg' },
+            { id: 39, name: 'Custard Powder', category: 'Dairy', image: 'https://grainngrace.co/cdn/shop/files/Custard-Powder-1-400x400.jpg?v=1690778678', price: 150, unit: 'kg' },
+            { id: 40, name: 'Malai', category: 'Dairy', image: 'https://i.ytimg.com/vi/UX16V3Voza0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLASrkKn7D9IXaJVttxQarppKlmpYA', price: 220, unit: 'kg' },
+
+            // Nuts and Dry Fruits (10)
+            { id: 41, name: 'Almonds', category: 'Nuts', image: 'https://cdn.britannica.com/04/194904-050-1B92812A/Raw-Food-Almond-food-Nut-Snack.jpg', price: 800, unit: 'kg' },
+            { id: 42, name: 'Cashews', category: 'Nuts', image: 'https://www.fruits365.shop/cdn/shop/products/cashew_1200x1200.jpg?v=1662629498', price: 750, unit: 'kg' },
+            { id: 43, name: 'Pistachios', category: 'Nuts', image: 'https://cdn.britannica.com/76/196076-050-6138D55B/pistachios.jpg', price: 1000, unit: 'kg' },
+            { id: 44, name: 'Walnuts', category: 'Nuts', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQua5whP0kaa9QKIJn9kjA41YvL55ChpSizAw&s', price: 900, unit: 'kg' },
+            { id: 45, name: 'Raisins', category: 'Dry Fruits', image: 'https://www.health.com/thmb/Nx5CKikXipMrUxpm2zTcAr-z3Dg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Health-GettyImages-1359551755-68e08afd6ffa4e3faaa5096a0bc4e702.jpg', price: 300, unit: 'kg' },
+            { id: 46, name: 'Dates', category: 'Dry Fruits', image: 'https://rukminim2.flixcart.com/image/850/1000/xif0q/nut-dry-fruit/b/v/i/1-medjool-dates-1kg-original-organic-fresh-1-box-herbanuts-original-imaghu2ha3xgg6gq.jpeg?q=90&crop=false', price: 350, unit: 'kg' },
+            { id: 47, name: 'Dried Coconut', category: 'Dry Fruits', image: 'https://4.imimg.com/data4/OK/EX/MY-28842634/dry-coconut-500x500.jpg', price: 250, unit: 'kg' },
+            { id: 48, name: 'Dried Apricots', category: 'Dry Fruits', image: 'https://www.nuturally.com/modules/prestablog/views/img/grid-for-1-7/up-img/518.jpg', price: 400, unit: 'kg' },
+            { id: 49, name: 'Chia Seeds', category: 'Nuts', image: 'https://static.toiimg.com/photo/94177866.cms', price: 500, unit: 'kg' },
+            { id: 50, name: 'Flax Seeds', category: 'Nuts', image: 'https://rukminim3.flixcart.com/image/850/1000/kzpw2vk0/plant-seed/g/v/f/1-flax-seed-linum-usitatissimum-250g-seeds-xetomos-original-imagbz3v85j7ecet.jpeg?q=20&crop=false', price: 300, unit: 'kg' },
+
+            // Oils and Extracts (10)
+            { id: 51, name: 'Olive Oil', category: 'Oils', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1dBWyUGm4BQ1k8B7UC7JBTSfBkRu-zFPb3g&s', price: 600, unit: 'kg' },
+            { id: 52, name: 'Coconut Oil', category: 'Oils', image: 'https://media.post.rvohealth.io/wp-content/uploads/2019/11/coconut-oil-732x549-thumbnail.jpg', price: 400, unit: 'kg' },
+            { id: 53, name: 'Almond Extract', category: 'Extracts', image: 'https://i.cdn.newsbytesapp.com/images/l44020241226105559.jpeg', price: 350, unit: 'kg' },
+            { id: 54, name: 'Lemon Extract', category: 'Extracts', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0hQhF5-OJUgRCDxOMGGWBi9Dvky_Rysw7yg&s', price: 300, unit: 'kg' },
+            { id: 55, name: 'Rose Water', category: 'Extracts', image: 'https://www.hairbuddha.net/wp-content/uploads/2015/07/rosewater-935-x-698.jpg', price: 250, unit: 'kg' },
+            { id: 56, name: 'Orange Extract', category: 'Extracts', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTheQXsqqQ9Cq-SmG-Qf1xP-tIpPKze_OKNgw&s', price: 280, unit: 'kg' },
+            { id: 57, name: 'Sunflower Oil', category: 'Oils', image: 'https://ases.in/cdn/shop/files/1_7c9cf6f2-d570-4f62-9a2f-8bdcbb84927a.jpg?v=1714507689', price: 150, unit: 'kg' },
+            { id: 58, name: 'Sesame Oil', category: 'Oils', image: 'https://i0.wp.com/www.hemvini.com/wp-content/uploads/2020/07/White-Sesame-Oil-min.jpg', price: 400, unit: 'kg' },
+            { id: 59, name: 'Hazelnut Extract', category: 'Extracts', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRedVh9MH0zpFCQhIH-vxyzFM9x3TSrdbz8hA&s', price: 400, unit: 'kg' },
+            { id: 60, name: 'Peanut Oil', category: 'Oils', image: 'https://www.andersonintl.com/wp-content/uploads/2022/12/Anderson-peanut-oil-extraction.jpg', price: 250, unit: 'kg' }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function renderIngredients(ingredientList) {
+            const grid = document.getElementById('ingredientsGrid');
+            grid.innerHTML = '';
+            ingredientList.forEach(ingredient => {
+                const card = document.createElement('div');
+                card.className = 'ingredient-card';
+                
+                const isInCart = cart.find(item => item.id === ingredient.id);
+                
+                card.innerHTML = `
+                    <img src="${ingredient.image}" alt="${ingredient.name}">
+                    <div class="ingredient-card-content">
+                        <h3>${ingredient.name}</h3>
+                        <p>₹${ingredient.price}/${ingredient.unit}</p>
+                        ${isInCart ? `
+                            <div class="cart-item-controls">
+                                <button onclick="updateQuantity(${ingredient.id}, -1)">-</button>
+                                <span>${isInCart.quantity}</span>
+                                <button onclick="updateQuantity(${ingredient.id}, 1)">+</button>
+                            </div>
+                        ` : `
+                            <button onclick="addToCart(${JSON.stringify(ingredient).replace(/"/g, '&quot;')})">Add to Cart</button>
+                        `}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addToCart(ingredient) {
+            const existingItem = cart.find(item => item.id === ingredient.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({...ingredient, quantity: 1});
+            }
+            updateCart();
+        }
+
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(cartItem => cartItem.id !== id);
+                }
+                updateCart();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        function updateCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <span>${item.name}</span>
+                    <div class="cart-item-controls">
+                        <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                        <button onclick="removeFromCart(${item.id})" class="remove-btn">🗑️</button>
+                    </div>
+                    <span>₹${item.price * item.quantity}</span>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+                total += item.price * item.quantity;
+            });
+            
+            cartTotalElement.textContent = `Total: ₹${total}`;
+            checkoutBtn.style.display = cart.length > 0 ? 'block' : 'none';
+            
+            renderIngredients(ingredients);
+        }
+
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredIngredients = ingredients.filter(ingredient => 
+                ingredient.name.toLowerCase().includes(searchTerm)
+            );
+            renderIngredients(filteredIngredients);
+        });
+
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            alert('Proceeding to checkout with ' + cart.length + ' items');
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            window.location.href = "bill.html";
+        });
+
+        // Initial render
+        renderIngredients(ingredients);
+        updateCart();
+    </script>
+</body>
+</html>

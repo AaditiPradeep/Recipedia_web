@@ -1,0 +1,239 @@
+/* Global Styles */
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+/* Search Bar */
+.search-container {
+    margin: 20px;
+}
+
+input[type="text"] {
+    padding: 12px;
+    width: 350px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: #333;
+    color: white;
+}
+
+button {
+    padding: 12px 18px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 8px;
+    color: #1a1a1a;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff8c00;
+}
+
+/* Recipes Grid */
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Reduced width */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.recipe-card {
+    background: #222;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.recipe-card:hover {
+    transform: scale(1.05);
+}
+
+.recipe-card img {
+    width: 90%; /* Reduced image size */
+    height: 150px; /* Adjusted height */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.recipe-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.recipe-card button {
+    width: 100%;
+    margin-top: auto; /* Pushes button to bottom */
+}
+/* Recipe Details Modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background: #222;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    text-align: left;
+    z-index: 1000;
+}
+
+.modal img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.modal h2 {
+    margin: 10px 0;
+}
+
+.modal p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.modal button {
+    display: block;
+    margin: auto;
+    margin-top: 15px;
+}
+
+/* Overlay Background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffa500;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #333;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 999;
+  }
+
+.recipe-modal img {
+    width: 85%;  /* Slightly smaller */
+    height: 180px; /* Reduced from 200px */
+    object-fit: cover;
+    border-radius: 8px;
+}
+.recipe-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Make it responsive */
+    max-width: 500px; /* Prevent too large modals */
+    max-height: 80vh; /* Prevent overflow */
+    overflow-y: auto; /* Enable scrolling */
+    background: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  } 
+.recipe-modal ol {
+    text-align: left;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.recipe-modal li {
+    font-size: 14px; /* Reduce font size slightly */
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+/* Login Page Styles */
+.login-container {
+    background: #222;
+    color: white;
+    width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 8px;
+    color: #1a1a1a;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff8c00;
+}
+
+.signup-link {
+    color: #ffa500;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}

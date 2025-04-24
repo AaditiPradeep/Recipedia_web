@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipedia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: poppins, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url('pngtree-table-is-filled-with-fruit-and-pies-picture-image_3431308.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    filter: brightness(1);
+}
+
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffc107;
+        }
+
+        .nav-links a:first-child {
+            color: #ffc107;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-buttons button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        #para1{
+            width: 60%;
+    
+    position: relative;
+        }
+.hero {
+    position: relative;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1; 
+    background: transparent; 
+    padding-bottom: 20%;
+}
+
+
+.hero-content {
+    width: 60%;
+    padding: 2rem 4rem;
+    position: relative;
+}
+
+.hero-content > div:not(.dots) {
+    position: absolute;
+    width: 50%;
+    opacity: 0;
+    transition: all 0.8s ease;
+    transform: translateX(-100%);
+    padding-top: 4rem;
+    font-size: 1rem; /* unified font size for slide content */
+}
+
+.hero-content > div.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero h1 {
+    font-size: 1.8rem; /* was 250% */
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+}
+
+.hero h3 {
+    font-size: 1rem; /* was 100% */
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.hero p {
+    font-size: 0.9rem; /* was 50% */
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.order-now {
+    background: #FFB800;
+    color: black;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 0.9rem; /* slightly larger */
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+ 
+
+.order-now:hover {
+    background: #ffc835;
+}
+
+.dots {
+    position: absolute;
+    bottom: 0%;        
+    left: 4rem;        
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #FFB800;  
+    width: 8px;       
+}
+
+
+nav {
+    transition: background-color 0.5s ease-in-out; /* Adjust duration as needed */
+}
+
+.nav-buttons button {
+    background-color: #FFB800;
+    color: black;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-buttons button:hover {
+    background-color: #ffc835;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    
+    <nav>
+        <div class="logo">Recipedia</div>
+        <div class="nav-links">
+            <a href="#home">HOME</a>
+            <a href="recipe.html" target="_blank">RECIPE</a>
+            <a href="ingredients.html" target="_blank">INGREDIENTS & RECIPE</a>
+            <a href="book.html">ORDER INGREDIENTS</a>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="window.location.href='/'">Logout</button>
+        </div>
+    </nav>
+    
+
+    <section class="hero"> 
+        <div class="hero-content"> 
+            <h3>Welcome to RecipeHub!</h3>
+            <p style="font-size: 0.9rem; padding-left: 1rem;">Your Ultimate Cooking Companion</p>
+            
+            <div class="active">
+                <h1>Explore<br>Delicious Recipes</h1> 
+                <p>Looking for inspiration? Our Recipe Page is a treasure trove of mouthwatering dishes! Whether you're craving a quick snack, a cozy comfort meal, or a show-stopping dinner, we’ve got something for you. Browse, save, and get step-by-step guidance to cook like a pro!</p> 
+                <button class="order-now" onclick="window.location.href='recipe.html'">Learn More</button>
+
+            </div>
+    
+            <div>
+                <h1>Ingredient-Based<br>Recipe Search</h1>
+                <p>Got a bunch of ingredients but no idea what to cook? Say no more! Our Ingredient-Based Search lets you enter what you have, and we’ll whip up perfect recipe suggestions just for you. Say goodbye to wasted food and hello to creative, resourceful cooking.</p>
+                <button class="order-now" onclick="window.location.href='ingredients.html'">Learn More</button>
+
+            </div>
+                <div>
+                <h1>Order<br>Fresh Ingredients</h1>
+                <p>Need to stock up on kitchen essentials? Our Order Ingredients Page allows you to browse and purchase fresh, high-quality ingredients with ease. No more last-minute grocery runs—get everything you need delivered right to your doorstep.</p>
+                <button class="order-now">Order Now</button>
+            </div>
+    
+            <div class="dots"> 
+                <div class="dot active"></div> 
+                <div class="dot"></div> 
+                <div class="dot"></div> 
+            </div> 
+        </div> 
+    </section>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const heroContent = document.querySelector('.hero-content');
+    const slides = heroContent.querySelectorAll(':scope > div:not(.dots)');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    let interval;
+    let isHovered = false;
+
+    function showSlide(index) {
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function startSlideshow() {
+        if (!isHovered) {
+            interval = setInterval(nextSlide, 3000);
+        }
+    }
+
+    function stopSlideshow() {
+        clearInterval(interval);
+    }
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+            stopSlideshow();
+            startSlideshow();
+        });
+
+        dot.addEventListener('mouseenter', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+            isHovered = true;
+            stopSlideshow();
+        });
+
+        dot.addEventListener('mouseleave', () => {
+            isHovered = false;
+            startSlideshow();
+        });
+    });
+
+    heroContent.addEventListener('mouseenter', () => {
+        isHovered = true;
+        stopSlideshow();
+    });
+
+    heroContent.addEventListener('mouseleave', () => {
+        isHovered = false;
+        startSlideshow();
+    });
+
+    showSlide(0);
+    startSlideshow();
+});
+    </script>
+</body>
+</html>

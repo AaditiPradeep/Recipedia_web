@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Search</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="logo">Recipedia</div>
+        <div class="nav-links">
+            <a href="home.html">HOME</a>
+            <a href="recipe.html">RECIPE</a>
+            <a href="ingredients.html">INGREDIENTS & RECIPE</a>
+            <a href="book.html">ORDER INGREDIENTS</a>
+        </div>
+    </nav>
+    <h1>Recipe Search</h1>
+    
+    <!-- Ingredient-Based Search -->
+    <form id="ingredient-search-form">
+        <input type="text" id="ingredient-input" placeholder="Enter comma-separated values">
+        <button type="submit">Search by Ingredients</button>
+    </form>
+
+    <div id="results"></div>
+    <div id="recipe-details" style="display:none;"></div>
+
+    <script src="script2.js"></script>
+</body>
+</html>

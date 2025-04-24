@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <link rel="stylesheet" href="bill.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    <h2>Bill Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price (₹)</th>
+                <th>Total (₹)</th>
+            </tr>
+        </thead>
+        <tbody id="bill-details"></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="total">Subtotal (₹)</td>
+                <td id="subtotal"></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="total">GST (18%) (₹)</td>
+                <td id="gst"></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="total">Grand Total (₹)</td>
+                <td id="grand-total"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <button onclick="window.print()">Print Bill</button>
+    <button onclick="window.location.href='book.html'">Continue Shopping</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let billDetails = document.getElementById("bill-details");
+            let subtotal = 0;
+
+            billDetails.innerHTML = cart.map(item => {
+                let itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                return `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>₹${item.price.toFixed(2)}</td>
+                        <td>₹${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            }).join("");
+
+            let gst = subtotal * 0.18;
+            let grandTotal = subtotal + gst;
+
+            document.getElementById("subtotal").innerText = `₹${subtotal.toFixed(2)}`;
+            document.getElementById("gst").innerText = `₹${gst.toFixed(2)}`;
+            document.getElementById("grand-total").innerText = `₹${grandTotal.toFixed(2)}`;
+        });
+    </script>
+
+</body>
+</html>

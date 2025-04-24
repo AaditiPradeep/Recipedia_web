@@ -1,0 +1,76 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('Green+Kitchen+-+Food+Photography+(with+Food+Stylist)+by+Alinea+Collective-13.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+h1 {
+    color: #FFB800;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 60%;
+    margin: auto;
+    border-collapse: collapse;
+    background-color: rgba(12, 0, 0, 0.9);
+    color: white;
+    border: 2px solid #FFB800;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #FFB800;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #FFB800;
+    color: black;
+}
+
+.total {
+    font-weight: bold;
+    color: #FFB800;
+}
+
+button {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #FFB800;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
